@@ -1,0 +1,33 @@
+name: Deploy to my server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Checkout code"
+      uses: actions/checkout@v4
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+
+    - name: Add Linux target
+      run: rustup target add x86_64-unknown-linux-gnu
+
+    - name: Build the project
+      run: cargo build --target x86_64-unknown-linux-gnu --release
+
+    - name: Deploy to server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        echo "$SSH_PRIVATE_KEY" > ssh_key
+        chmod 600 ssh_key
+        scp -i ssh_key target/x86_64-unknown-linux-gnu/release/todo user@your-debian-server-ip:/usr/local/bin/todo
