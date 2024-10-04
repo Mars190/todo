@@ -21,7 +21,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let offset = 3;
     for i in offset..height {
         if i < height - 1 {
-            println!("Todo item {}", i - offset);
+            let formatted_left = format!("[{}] Todo item", i);
+            let chars_count = formatted_left.chars().count() as u16;
+            let spaces_count = (width as u16) - chars_count - 3;
+            let spaces = " ".repeat(spaces_count.max(0) as usize);
+            let formatted = format!("{}{}[{}]", formatted_left, spaces, "x");
+            println!("{}", formatted);
         } else {
             println!("Press any key to continue...");
         }
