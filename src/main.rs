@@ -21,7 +21,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let offset = 3;
     for i in offset..height {
         if i < height - 1 {
-            println!("Todo item {}", i + 1);
+            println!("Todo item {}", i - offset);
         } else {
             println!("Press any key to continue...");
         }
