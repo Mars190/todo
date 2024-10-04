@@ -18,11 +18,8 @@ jobs:
       with:
         toolchain: stable
 
-    - name: Add Linux target
-      run: rustup target add x86_64-unknown-linux-gnu
-
     - name: Build the project
-      run: cargo build --target x86_64-unknown-linux-gnu --release
+      run: cargo build --release
 
     - name: Deploy to server
       env:
@@ -32,9 +29,9 @@ jobs:
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        
+
         # Set up known hosts to avoid confirmation prompt
-        ssh-keyscan 192.168.178.31 >> ~/.ssh/known_hosts
+        ssh-keyscan your-debian-server-ip >> ~/.ssh/known_hosts
 
         # Deploy the binary to the server
-        scp -i ~/.ssh/id_rsa target/x86_64-unknown-linux-gnu/release/todo marc@192.168.178.31:/usr/local/bin/todo
+        scp -i ~/.ssh/id_rsa target/release/todo marc@your-debian-server-ip:/usr/local/bin/todo
