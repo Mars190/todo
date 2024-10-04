@@ -24,6 +24,9 @@ jobs:
     - name: Deploy to server
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        USERNAME: ${{ secrets.USERNAME }}
+        TARGET_BINARY_DIR: ${{ secrets.TARGET_BINARY_DIRECTORY }}
       run: |
         # Create SSH key for authentication
         mkdir -p ~/.ssh
@@ -31,7 +34,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
         # Set up known hosts to avoid confirmation prompt
-        ssh-keyscan 192.168.178.31 >> ~/.ssh/known_hosts
+        ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
 
         # Deploy the binary to the server
-        scp -i ~/.ssh/id_rsa target/release/todo marc@192.168.178.31:/usr/local/bin/todo
+        scp -i ~/.ssh/id_rsa target/release/todo $USERNAME@$SERVER_IP:$TARGET_BINARY_DIR

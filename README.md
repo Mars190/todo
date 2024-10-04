@@ -1,21 +1,8 @@
-# Cross-Compiling Rust for Linux on Windows
-
-This will walk you through the steps of building a binary for linux on a windows machine
-
-## Requirements 
-- Rust
-- Running Docker Engine
-- Cross, a Rust Crate 
+## Things to do before being able to deploy
+1. Add a local runner: [Docs](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
+2. Change the ownership of the binary directory on your machine with the username that is used in the deployment
     ```bash
-    cargo install cross
+    sudo chown YOUR_USERNAME:YOUR_USERNAME /usr/local/bin
+    sudo chmod u+w /usr/local/bin
     ```
-
-## Steps
-1. Add Linux Target for Rust
-    ```bash
-    rustup target add x86_64-unknown-linux-gnu
-    ```
-2. Cross compile
-    ```bash
-    cross build --target x86_64-unknown-linux-gnu --release
-    ```
+3. [Add secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) for the environment variables in the `deploy.yml` action
