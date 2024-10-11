@@ -22,7 +22,12 @@ jobs:
         toolchain: stable
 
     - name: Build the project
-      run: cargo build --$BUILD_TYPE
+      run: |
+        if [ "${{ env.BUILD_TYPE }}" = "release" ]; then
+          cargo build --release;
+        else
+          cargo build;
+        fi
 
     - name: Deploy to server
       env:
