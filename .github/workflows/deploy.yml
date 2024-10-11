@@ -45,4 +45,4 @@ jobs:
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
 
         # Deploy the binary to the server
-        scp -i ~/.ssh/id_rsa target/$BUILD_TYPE/todo $USERNAME@$SERVER_IP:$TARGET_BINARY_DIR
+        scp -v -i ~/.ssh/id_rsa target/$BUILD_TYPE/todo $USERNAME@$SERVER_IP:$TARGET_BINARY_DIR
