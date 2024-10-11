@@ -8,6 +8,8 @@ use key_listener::KeyListener;
 use service::Service;
 
 fn main() {
+    println!("Starting app...");
+
     let key_listener = KeyListener {};
     let mut state = AppState::new();
     let service = Service::new();

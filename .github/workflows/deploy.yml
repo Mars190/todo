@@ -19,7 +19,7 @@ jobs:
         toolchain: stable
 
     - name: Build the project
-      run: cargo build --release
+      run: cargo build
 
     - name: Deploy to server
       env:
