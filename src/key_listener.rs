@@ -9,10 +9,12 @@ impl KeyListener {
         loop {
             let event = read().unwrap();
             if let Event::Key(key) = event {
+                println!("DEBUG: Key event");
                 if key.kind != KeyEventKind::Press {
                     continue;
                 }
 
+                println!("DEBUG: Key event, pressed");
                 match state.get_mode() {
                     Mode::Main => self.prototype_handle_keys(key, state, service),
                     _ => {}
