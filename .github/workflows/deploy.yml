@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  BUILD_TYPE: debug
+
 jobs:
   deploy:
     runs-on: self-hosted # Debian 12, same server as the deployment goes to
@@ -19,7 +22,7 @@ jobs:
         toolchain: stable
 
     - name: Build the project
-      run: cargo build
+      run: cargo build --$BUILD_TYPE
 
     - name: Deploy to server
       env:
@@ -37,4 +40,4 @@ jobs:
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
 
         # Deploy the binary to the server
-        scp -i ~/.ssh/id_rsa target/release/todo $USERNAME@$SERVER_IP:$TARGET_BINARY_DIR
+        scp -i ~/.ssh/id_rsa target/$BUILD_TYPE/todo $USERNAME@$SERVER_IP:$TARGET_BINARY_DIR
