@@ -1,4 +1,6 @@
-use std::process::ExitCode;
+use std::{io::stdout, process::ExitCode};
+
+use crossterm::{event::{KeyEvent, KeyModifiers}, terminal, ExecutableCommand};
 
 use crate::app_state::AppState;
 
@@ -16,7 +18,6 @@ impl Service {
     }
 
     pub fn quit() {
-        println!("Pressed Q, exiting");
         std::process::exit(0);
     }
 
