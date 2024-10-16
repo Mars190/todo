@@ -18,6 +18,7 @@ impl Service {
     }
 
     pub fn quit() {
+        println!("Pressed Q, exiting");
         std::process::exit(0);
     }
 
