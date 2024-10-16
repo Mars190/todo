@@ -1,5 +1,5 @@
 use crossterm::event::{read, Event, KeyCode, KeyEvent, KeyEventKind};
-use crossterm::terminal::{disable_raw_mode, enable_raw_mode};
+use crossterm::terminal::enable_raw_mode;
 use crate::app_state::{AppState, Mode};
 use crate::service::Service;
 
@@ -22,8 +22,6 @@ impl KeyListener {
                 }
             }
         }
-
-        disable_raw_mode().unwrap();
     }
 
     fn prototype_handle_keys(&self, key: KeyEvent, state: &mut AppState, service: &Service) {

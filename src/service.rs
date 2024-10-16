@@ -1,6 +1,4 @@
-use std::{io::stdout, process::ExitCode};
-
-use crossterm::{event::{KeyEvent, KeyModifiers}, terminal, ExecutableCommand};
+use crossterm::{event::{KeyEvent, KeyModifiers}, terminal::disable_raw_mode};
 
 use crate::app_state::AppState;
 
@@ -18,6 +16,7 @@ impl Service {
     }
 
     pub fn quit() {
+        disable_raw_mode().unwrap();
         std::process::exit(0);
     }
 
