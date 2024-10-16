@@ -1,6 +1,4 @@
-use std::{io::stdout, process::ExitCode};
-
-use crossterm::{event::{KeyEvent, KeyModifiers}, terminal, ExecutableCommand};
+use std::process::ExitCode;
 
 use crate::app_state::AppState;
 
